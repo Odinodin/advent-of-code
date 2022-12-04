@@ -1,4 +1,4 @@
-(ns advent.main
+(ns advent.day-01
   (:require [clojure.string :as str]))
 
 (defn day-1-calculate-calories [input]
