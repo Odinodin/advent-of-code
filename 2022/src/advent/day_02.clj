@@ -1,6 +1,5 @@
 (ns advent.day-02
-  (:require [clojure.string :as str])
-  )
+  (:require [clojure.string :as str]))
 
 (defn to-sign [char]
   (case char
@@ -31,14 +30,14 @@
     ;; Loss
     (or (= [a b] [:rock :scissors])
         (= [a b] [:paper :rock])
-        (= [a b] [:scissors :paper])
-        ) 0
+        (= [a b] [:scissors :paper]))
+    0
 
     ;; win
     (or (= [b a] [:rock :scissors])
         (= [b a] [:paper :rock])
-        (= [b a] [:scissors :paper])) 6))
-
+        (= [b a] [:scissors :paper]))
+    6))
 
 (defn single-round-score [{:keys [opponent you]}]
   (let [shape-score (case you :rock 1 :paper 2 :scissors 3)
