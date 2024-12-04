@@ -8,3 +8,8 @@
       (map
         #(str/split % #"\s+")
         (line-seq rdr)))))
+
+(defn read-file-into-list [filepath]
+  (with-open [rdr (io/reader filepath)]
+    (doall
+      (line-seq rdr))))
