@@ -1,9 +1,5 @@
 (ns advent.day-04
-  (:require [advent.util :as util]
-            [clojure.string :as str]))
-
-(defn day-4-star-2 [path]
-  )
+  (:require [clojure.string :as str]))
 
 (defn indexed [items]
   (map-indexed vector items))

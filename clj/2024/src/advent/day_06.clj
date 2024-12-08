@@ -1,0 +1,99 @@
+(ns advent.day-06
+  (:require [advent.util :as util]
+            [medley.core :as m]
+            [clojure.set :refer [difference union intersection]]
+            [clojure.string :as str]))
+
+(defn bounds-map [xy-to-char]
+  (let [width (->> xy-to-char keys (map first) (apply max) inc) ;; inc because 0-based coordinates
+        height (->> xy-to-char keys (map second) (apply max) inc)]
+    [width height]))
+
+(defn reify-map [xy-to-char]
+  (let [[width height] (bounds-map xy-to-char)]
+    (->> (for [col (range width)
+               row (range height)]
+           (str (get xy-to-char [row col])))
+         (partition width))))
+
+(defn print-map! [mappy]
+  (doseq [row mappy]
+    (println (str/join "" row))))
+
+(defn mark-visited [xy-to-char [x y] ]
+  (assoc xy-to-char [x y] \X))
+
+(defn within-bounds? [width height [x y]]
+  (and (< x width)
+       (< y height)
+       (>= x 0)
+       (>= y 0)))
+
+(defn rotate [direction]
+  (get {:up :right
+        :right :down
+        :down :left
+        :left :up} direction))
+
+(defn next-pos [[x y] direction]
+  (case direction
+    :up [x (dec y)]
+    :right [(inc x) y]
+    :down [x (inc y)]
+    :left [(dec x) y]))
+
+(defn move [xy-to-char curr-pos curr-direction]
+  (let [next-xy (next-pos curr-pos curr-direction)
+        is-blocked? (= (get xy-to-char next-xy) \#)]
+    (if is-blocked?
+      [curr-pos (rotate curr-direction)]
+      [next-xy curr-direction])))
+
+(defn perform-movement [xy-to-char]
+  (let [start-pos (m/find-first (fn [[x y]]
+                                  (= (xy-to-char [x y])
+                                     \^))
+                                (keys xy-to-char))
+        [width height] (bounds-map xy-to-char)]
+    (loop [curr-pos start-pos
+           curr-map xy-to-char
+           curr-direction :up]
+      (if (within-bounds? width height curr-pos)            ;; Recursion base case, are we done?
+        (let [updated-map (mark-visited curr-map curr-pos)
+              [updated-pos updated-direction] (move curr-map curr-pos curr-direction)]
+          (recur updated-pos updated-map updated-direction))
+        (mark-visited curr-map curr-pos)))))
+
+
+(defn count-visited-locations [xy-to-char]
+  (-> (count (filter (fn [[_ v]] (= v \X)) xy-to-char))
+      ;; Do not count first pos
+       (dec)))
+
+
+(defn day-6-star-1 [path]
+  (let [xy-to-char (util/xy-to-char path)]
+    (->> (perform-movement xy-to-char)
+         (count-visited-locations))))
+
+
+(defn day-6-star-2 [path]
+  )
+
+
+(comment
+  (let [xy-to-char (util/xy-to-char "resources/day6-input.txt")]
+    (->> (perform-movement xy-to-char)
+         (count-visited-locations)
+         )
+    )
+
+
+  (filter #(= (first %) 1) {1 "a" 2 "b"})
+
+  (day-6-star-1 "resources/day6-test-input.txt")
+  (day-6-star-1 "resources/day6-input.txt")
+
+  (day-6-star-2 "resources/day6-test-input.txt")
+  (day-6-star-2 "resources/day6-input.txt")
+  )
