@@ -20,8 +20,8 @@
   (doseq [row mappy]
     (println (str/join "" row))))
 
-(defn mark-visited [xy-to-char [x y] ]
-  (assoc xy-to-char [x y] \X))
+(defn mark-visited [xy-to-char [x y] direction]
+  (assoc xy-to-char [x y] direction))
 
 (defn within-bounds? [width height [x y]]
   (and (< x width)
@@ -59,30 +59,45 @@
            curr-map xy-to-char
            curr-direction :up]
       (if (within-bounds? width height curr-pos)            ;; Recursion base case, are we done?
-        (let [updated-map (mark-visited curr-map curr-pos)
+        (let [updated-map (mark-visited curr-map curr-pos curr-direction)
               [updated-pos updated-direction] (move curr-map curr-pos curr-direction)]
           (recur updated-pos updated-map updated-direction))
-        (mark-visited curr-map curr-pos)))))
+        ;; Done!
+        (mark-visited curr-map curr-pos curr-direction)))))
 
 
 (defn count-visited-locations [xy-to-char]
-  (-> (count (filter (fn [[_ v]] (= v \X)) xy-to-char))
+  (-> (count (filter (fn [[_ v]] (keyword? v)) xy-to-char))
       ;; Do not count first pos
        (dec)))
-
 
 (defn day-6-star-1 [path]
   (let [xy-to-char (util/xy-to-char path)]
     (->> (perform-movement xy-to-char)
          (count-visited-locations))))
 
+(defn make-all-combinations [initial-xy-to-char]
+  (let [[width height] (bounds-map initial-xy-to-char)]
+    ;; TODO continue
+    (->> (for [col (range width)
+               row (range height)]
+           (str (get xy-to-char [row col]))))
+
+    )
+  )
 
 (defn day-6-star-2 [path]
+  (let [initial-xy-to-char (util/xy-to-char path)
+        all-combinations (make-all-combinations initial-xy-to-char)]
+
+    (->> (perform-movement xy-to-char)
+         (count-visited-locations)))
+
   )
 
 
 (comment
-  (let [xy-to-char (util/xy-to-char "resources/day6-input.txt")]
+  (let [xy-to-char (util/xy-to-char "resources/day-6-input.txt")]
     (->> (perform-movement xy-to-char)
          (count-visited-locations)
          )
@@ -91,9 +106,9 @@
 
   (filter #(= (first %) 1) {1 "a" 2 "b"})
 
-  (day-6-star-1 "resources/day6-test-input.txt")
-  (day-6-star-1 "resources/day6-input.txt")
+  (day-6-star-1 "resources/day-6-test-input.txt")
+  (day-6-star-1 "resources/day-6-input.txt")
 
-  (day-6-star-2 "resources/day6-test-input.txt")
-  (day-6-star-2 "resources/day6-input.txt")
+  (day-6-star-2 "resources/day-6-test-input.txt")
+  (day-6-star-2 "resources/day-6-input.txt")
   )

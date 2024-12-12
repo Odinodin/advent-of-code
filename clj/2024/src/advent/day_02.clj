@@ -42,8 +42,8 @@
 
 (comment
 
-  (day-2-star-1 "resources/day2-test-input.txt")
-  (day-2-star-2 "resources/day2-test-input.txt")
-  (day-2-star-1 "resources/day2-input1.txt")
-  (day-2-star-2 "resources/day2-input1.txt")
+  (day-2-star-1 "resources/day-2-test-input.txt")
+  (day-2-star-2 "resources/day-2-test-input.txt")
+  (day-2-star-1 "resources/day-2-input1.txt")
+  (day-2-star-2 "resources/day-2-input1.txt")
   )

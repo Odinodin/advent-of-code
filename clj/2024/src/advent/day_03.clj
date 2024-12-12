@@ -49,10 +49,10 @@
   ;;  57557767
 
 
-  (slurp "resources/day3-input1.txt")
-  (day-3-star-1 "resources/day3-test-input.txt")
-  (day-3-star-1 "resources/day3-input1.txt")
+  (slurp "resources/day-3-input1.txt")
+  (day-3-star-1 "resources/day-3-test-input.txt")
+  (day-3-star-1 "resources/day-3-input1.txt")
 
-  (day-3-star-2 "resources/day3-test-input2.txt")
-  (day-3-star-2 "resources/day3-input1.txt")
+  (day-3-star-2 "resources/day-3-test-input2.txt")
+  (day-3-star-2 "resources/day-3-input1.txt")
   )

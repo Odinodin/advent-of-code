@@ -26,8 +26,8 @@
     (reduce + times-in-list-mult)))
 
 (comment
-  (read-file-into-list-of-lists "resources/day1-test-input.txt")
-  (day-1-star-1 "resources/day1-input1.txt")
-  (day-1-star-2 "resources/day1-input1.txt")
+  (read-file-into-list-of-lists "resources/day-1-test-input.txt")
+  (day-1-star-1 "resources/day-1-input1.txt")
+  (day-1-star-2 "resources/day-1-input1.txt")
   )
 

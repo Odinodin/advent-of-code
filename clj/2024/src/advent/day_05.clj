@@ -114,7 +114,7 @@
   (def rules [[5 1] [2 4] [5 3]])
   (kahn-sort numbers rules)
 
-  (let [path "resources/day5-test-input.txt"
+  (let [path "resources/day-5-test-input.txt"
         all-lines (util/read-file-into-list path)
 
         split (split-with (fn [x] (not= x "")) all-lines)
@@ -145,9 +145,9 @@
   ;; 7739 too high
 
 
-  (day-5-star-1 "resources/day5-test-input.txt")
-  (day-5-star-1 "resources/day5-input.txt")
+  (day-5-star-1 "resources/day-5-test-input.txt")
+  (day-5-star-1 "resources/day-5-input.txt")
 
-  (day-5-star-2 "resources/day5-test-input.txt")
-  (day-5-star-2 "resources/day5-input.txt")
+  (day-5-star-2 "resources/day-5-test-input.txt")
+  (day-5-star-2 "resources/day-5-input.txt")
   )

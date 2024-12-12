@@ -53,8 +53,8 @@
 
 (comment
 
-  (day-4-star-1 "resources/day4-input1.txt")
-  (day-4-star-2 "resources/day4-input1.txt")
+  (day-4-star-1 "resources/day-4-input1.txt")
+  (day-4-star-2 "resources/day-4-input1.txt")
 
 
 
@@ -68,10 +68,10 @@
 
   (seq "asdasd")
 
-  (slurp "resources/day4-input1.txt")
-  (day-4-star-1 "resources/day4-test-input.txt")
-  (day-4-star-1 "resources/day4-input1.txt")
+  (slurp "resources/day-4-input1.txt")
+  (day-4-star-1 "resources/day-4-test-input.txt")
+  (day-4-star-1 "resources/day-4-input1.txt")
 
   (day-4-star-2 "resources/day4-test-input2.txt")
-  (day-4-star-2 "resources/day4-input1.txt")
+  (day-4-star-2 "resources/day-4-input1.txt")
   )
