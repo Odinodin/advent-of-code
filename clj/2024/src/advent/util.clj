@@ -24,3 +24,20 @@
         (for [[y line] (indexed (str/split-lines (slurp path)))
               [x c] (indexed line)]
           [[x y] c])))
+
+(defn bounds-map [xy-to-char]
+  (let [width (->> xy-to-char keys (map first) (apply max) inc) ;; inc because 0-based coordinates
+        height (->> xy-to-char keys (map second) (apply max) inc)]
+    [width height]))
+
+
+(defn reify-map [xy-to-char]
+  (let [[width height] (bounds-map xy-to-char)]
+    (->> (for [col (range width)
+               row (range height)]
+           (str (get xy-to-char [row col])))
+         (partition width))))
+
+(defn print-map! [mappy]
+  (doseq [row mappy]
+    (println (str/join "" row))))

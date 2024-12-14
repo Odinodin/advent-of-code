@@ -4,22 +4,6 @@
             [clojure.set :refer [difference union intersection]]
             [clojure.string :as str]))
 
-(defn bounds-map [xy-to-char]
-  (let [width (->> xy-to-char keys (map first) (apply max) inc) ;; inc because 0-based coordinates
-        height (->> xy-to-char keys (map second) (apply max) inc)]
-    [width height]))
-
-(defn reify-map [xy-to-char]
-  (let [[width height] (bounds-map xy-to-char)]
-    (->> (for [col (range width)
-               row (range height)]
-           (str (get xy-to-char [row col])))
-         (partition width))))
-
-(defn print-map! [mappy]
-  (doseq [row mappy]
-    (println (str/join "" row))))
-
 (defn mark-visited [xy-to-char [x y] direction]
   (assoc xy-to-char [x y] direction))
 
@@ -54,7 +38,7 @@
                                   (= (xy-to-char [x y])
                                      \^))
                                 (keys xy-to-char))
-        [width height] (bounds-map xy-to-char)]
+        [width height] (util/bounds-map xy-to-char)]
     (loop [curr-pos start-pos
            curr-map xy-to-char
            curr-direction :up]
@@ -77,11 +61,11 @@
          (count-visited-locations))))
 
 (defn make-all-combinations [initial-xy-to-char]
-  (let [[width height] (bounds-map initial-xy-to-char)]
+  (let [[width height] (util/bounds-map initial-xy-to-char)]
     ;; TODO continue
     (->> (for [col (range width)
                row (range height)]
-           (str (get xy-to-char [row col]))))
+           (str (get util/xy-to-char [row col]))))
 
     )
   )

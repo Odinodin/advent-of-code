@@ -1,14 +1,5 @@
 (ns advent.day-04
-  (:require [clojure.string :as str]))
-
-(defn indexed [items]
-  (map-indexed vector items))
-
-(defn xy-to-char [path]
-  (into {}
-        (for [[y line] (indexed (str/split-lines (slurp path)))
-              [x c] (indexed line)]
-          [[x y] c])))
+  (:require [advent.util :as util]))
 
 (defn make-4-letter-word [xy-to-char [x y] [dx dy]]
   (str (get xy-to-char [x y])
@@ -31,7 +22,7 @@
       [])))
 
 (defn day-4-star-1 [path]
-  (let [xy-char (xy-to-char path)]
+  (let [xy-char (util/xy-to-char path)]
     (->> (for [coordinate (keys xy-char)
                dx [-1 0 1]
                dy [-1 0 1]
@@ -44,7 +35,7 @@
   (or (= input "MAS") (= input "SAM")))
 
 (defn day-4-star-2 [path]
-  (let [xy-char (xy-to-char path)]
+  (let [xy-char (util/xy-to-char path)]
     (->> (for [coordinate (keys xy-char)]
            (make-MAS-words-around-x xy-char coordinate))
          (remove empty?)
