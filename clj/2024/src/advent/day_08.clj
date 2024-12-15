@@ -8,12 +8,6 @@
 (defn update-map-location [xy-to-char [x y] value]
   (assoc xy-to-char [x y] value))
 
-(defn out-of-bounds? [[width height] [x y]]
-  (or (< x 0)
-      (< y 0)
-      (>= x width)
-      (>= y height)))
-
 (defn day-8-star-1 [path]
   (let [xy-char (util/xy-to-char path)
         list-of-lists-with-xy-of-same-char (->> (group-by second xy-char)
@@ -36,7 +30,7 @@
                                         [[antinode-1-x antinode-1-y]
                                          [antinode-2-x antinode-2-y]])))
                             distinct
-                            (remove #(out-of-bounds? [width height] %)))]
+                            (remove #(util/out-of-bounds? [width height] %)))]
 
       #_(->> xy-char
              util/reify-map
@@ -77,12 +71,12 @@
                                                      (map (fn [i]
                                                             (antinode-next-to [x1 y1] (* i (- x1 x2)) (* i (- y1 y2)))))
                                                      (take-while (fn [coord]
-                                                                   (not (out-of-bounds? [width height] coord)))))
+                                                                   (not (util/out-of-bounds? [width height] coord)))))
                                                 (->> (iterate inc 0)
                                                      (map (fn [i]
                                                             (antinode-next-to [x2 y2] (* i (- x2 x1)) (* i (- y2 y1)))))
                                                      (take-while (fn [coord]
-                                                                   (not (out-of-bounds? [width height] coord)))))))))
+                                                                   (not (util/out-of-bounds? [width height] coord)))))))))
                             distinct
                             (remove #(out-of-bounds? [width height] %)))]
       (count antinode-coords))))

@@ -30,6 +30,11 @@
         height (->> xy-to-char keys (map second) (apply max) inc)]
     [width height]))
 
+(defn out-of-bounds? [[width height] [x y]]
+  (or (< x 0)
+      (< y 0)
+      (>= x width)
+      (>= y height)))
 
 (defn reify-map [xy-to-char]
   (let [[width height] (bounds-map xy-to-char)]
@@ -41,3 +46,4 @@
 (defn print-map! [mappy]
   (doseq [row mappy]
     (println (str/join "" row))))
+
