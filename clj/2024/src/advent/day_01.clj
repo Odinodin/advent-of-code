@@ -1,7 +1,9 @@
 (ns advent.day-01
   (:require [advent.util :as util]))
 
-(defn day-1-star-1 [input-file-name]
+(def input-path "resources/day01/")
+
+(defn star-1 [input-file-name]
   (let [lines (util/read-file-into-list-of-lists input-file-name)
         left-list (->> lines (map first) sort (map #(Integer/parseInt %)))
         right-list (->> lines (map second) sort (map #(Integer/parseInt %)))
@@ -10,7 +12,7 @@
         sum (reduce + distances)]
     sum))
 
-(defn day-1-star-2 [input-file-name]
+(defn star-2 [input-file-name]
   (let [lines (util/read-file-into-list-of-lists input-file-name)
         left-list (->> lines (map first) sort (map #(Integer/parseInt %)))
         right-list (->> lines (map second) sort (map #(Integer/parseInt %)))
@@ -26,8 +28,6 @@
     (reduce + times-in-list-mult)))
 
 (comment
-  (read-file-into-list-of-lists "resources/day-1-test-input.txt")
-  (day-1-star-1 "resources/day-1-input1.txt")
-  (day-1-star-2 "resources/day-1-input1.txt")
-  )
+  (star-1 (str input-path "input.txt"))
+  (star-2 (str input-path "input.txt")))
 
