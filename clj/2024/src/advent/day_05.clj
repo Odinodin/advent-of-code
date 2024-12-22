@@ -4,6 +4,8 @@
             [clojure.set :refer [difference union intersection]]
             [clojure.string :as str]))
 
+(def input-path "resources/day05/")
+
 (defn is-valid-print-job? [pages-to-print page->before-other-pages]
   (let [page->idx (->> (map-indexed (fn [idx item] [item idx]) pages-to-print)
                        (into {}))]
@@ -20,7 +22,7 @@
     (when (pos? n)
       (nth lst mid))))
 
-(defn day-5-star-1 [path]
+(defn star-1 [path]
   (let [all-lines (util/read-file-into-list path)
 
         split (split-with (fn [x] (not= x "")) all-lines)
@@ -80,7 +82,7 @@
        (recur g' (conj l n) (union s' (intersection (no-incoming g') m)))))))
 
 
-(defn day-5-star-2 [path]
+(defn star-2 [path]
   (let [all-lines (util/read-file-into-list path)
 
         split (split-with (fn [x] (not= x "")) all-lines)
@@ -114,7 +116,7 @@
   (def rules [[5 1] [2 4] [5 3]])
   (kahn-sort numbers rules)
 
-  (let [path "resources/day-5-test-input.txt"
+  (let [path (str input-path "test-input.txt")
         all-lines (util/read-file-into-list path)
 
         split (split-with (fn [x] (not= x "")) all-lines)
@@ -142,12 +144,9 @@
          (map middle-item)
          (reduce +)))
 
-  ;; 7739 too high
+  (star-1 (str input-path "test-input.txt"))
+  (star-1 (str input-path "input.txt"))
 
-
-  (day-5-star-1 "resources/day-5-test-input.txt")
-  (day-5-star-1 "resources/day-5-input.txt")
-
-  (day-5-star-2 "resources/day-5-test-input.txt")
-  (day-5-star-2 "resources/day-5-input.txt")
+  (star-2 (str input-path "test-input.txt"))
+  (star-2 (str input-path "input.txt"))
   )

@@ -3,6 +3,7 @@
             [clojure.string :as str]
             [medley.core :as m]))
 
+(def input-path "resources/day07/")
 
 (defn all-operator-combinations
   "Returns a lazy sequence of all combinations of the items in operators of length x."
@@ -39,7 +40,7 @@
               (= desired-result actual)))
       combinations)))
 
-(defn day-7-star-1 [path]
+(defn star-1 [path]
   (let [lines (util/read-file-into-list path)
         sum-and-input (->> lines
                            (map (fn [line] (let [[sum input] (str/split line #":")]
@@ -51,7 +52,7 @@
          (map :desired-result)
          (reduce +))))
 
-(defn day-7-star-2 [path]
+(defn star-2 [path]
   (let [lines (util/read-file-into-list path)
         sum-and-input (->> lines
                            (map (fn [line] (let [[sum input] (str/split line #":")]
@@ -64,8 +65,8 @@
          (reduce +))))
 
 (comment
-  (day-7-star-1 "resources/day-7-test-input.txt")
-  (day-7-star-1 "resources/day-7-input.txt")
+  (star-1 (str input-path "test-input.txt"))
+  (star-1 (str input-path "input.txt"))
 
-  (day-7-star-2 "resources/day-7-test-input.txt")
-  (day-7-star-2 "resources/day-7-input.txt"))
+  (star-2 (str input-path "test-input.txt"))
+  (star-2 (str input-path "input.txt")))

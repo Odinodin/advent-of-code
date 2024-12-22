@@ -4,6 +4,8 @@
             [clojure.set :refer [difference union intersection]]
             [clojure.string :as str]))
 
+(def input-path "resources/day06/")
+
 (defn mark-visited [xy-to-char [x y] direction]
   (assoc xy-to-char [x y] direction))
 
@@ -55,7 +57,7 @@
       ;; Do not count first pos
        (dec)))
 
-(defn day-6-star-1 [path]
+(defn star-1 [path]
   (let [xy-to-char (util/xy-to-char path)]
     (->> (perform-movement xy-to-char)
          (count-visited-locations))))
@@ -70,7 +72,7 @@
     )
   )
 
-(defn day-6-star-2 [path]
+(defn star-2 [path]
   (let [initial-xy-to-char (util/xy-to-char path)
         all-combinations (make-all-combinations initial-xy-to-char)]
 
@@ -81,18 +83,14 @@
 
 
 (comment
-  (let [xy-to-char (util/xy-to-char "resources/day-6-input.txt")]
+  (let [xy-to-char (util/xy-to-char (str input-path "input.txt"))]
     (->> (perform-movement xy-to-char)
          (count-visited-locations)
-         )
-    )
+         ))
 
+  (star-1 (str input-path "test-input.txt"))
+  (star-1 (str input-path "input.txt"))
 
-  (filter #(= (first %) 1) {1 "a" 2 "b"})
-
-  (day-6-star-1 "resources/day-6-test-input.txt")
-  (day-6-star-1 "resources/day-6-input.txt")
-
-  (day-6-star-2 "resources/day-6-test-input.txt")
-  (day-6-star-2 "resources/day-6-input.txt")
+  (star-2 (str input-path "test-input.txt"))
+  (star-2 (str input-path "input.txt"))
   )

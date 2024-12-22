@@ -1,6 +1,8 @@
 (ns advent.day-04
   (:require [advent.util :as util]))
 
+(def input-path "resources/day04/")
+
 (defn make-4-letter-word [xy-to-char [x y] [dx dy]]
   (str (get xy-to-char [x y])
        (get xy-to-char [(+ x dx) (+ y dy)])
@@ -21,7 +23,7 @@
         [word-1 word-2])
       [])))
 
-(defn day-4-star-1 [path]
+(defn star-1 [path]
   (let [xy-char (util/xy-to-char path)]
     (->> (for [coordinate (keys xy-char)
                dx [-1 0 1]
@@ -34,7 +36,7 @@
 (defn is-mas-or-sam? [input]
   (or (= input "MAS") (= input "SAM")))
 
-(defn day-4-star-2 [path]
+(defn star-2 [path]
   (let [xy-char (util/xy-to-char path)]
     (->> (for [coordinate (keys xy-char)]
            (make-MAS-words-around-x xy-char coordinate))
@@ -44,25 +46,13 @@
 
 (comment
 
-  (day-4-star-1 "resources/day-4-input1.txt")
-  (day-4-star-2 "resources/day-4-input1.txt")
+  (star-1 (str input-path "input1.txt"))
+  (star-2 (str input-path "input1.txt"))
 
+  (slurp (str input-path "input1.txt"))
+  (star-1 (str input-path "test-input.txt"))
+  (star-1 (str input-path "input1.txt"))
 
-
-  (for [x (keys {"a" 1 "b" 2 "c" 3})
-        other [1 2 3 4 5]
-        other2 ["x" "y" "z"]
-        ]
-
-    )
-
-
-  (seq "asdasd")
-
-  (slurp "resources/day-4-input1.txt")
-  (day-4-star-1 "resources/day-4-test-input.txt")
-  (day-4-star-1 "resources/day-4-input1.txt")
-
-  (day-4-star-2 "resources/day4-test-input2.txt")
-  (day-4-star-2 "resources/day-4-input1.txt")
+  (star-2 (str input-path "input2.txt"))
+  (star-2 (str input-path "input1.txt"))
   )

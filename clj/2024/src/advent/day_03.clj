@@ -2,6 +2,8 @@
   (:require [advent.util :as util]
             [clojure.string :as str]))
 
+(def input-path "resources/day03/")
+
 (defn find-mul-patterns [s]
   (re-seq #"mul\(\d+,\d+\)" s))
 
@@ -19,7 +21,7 @@
         to-be-included (map get-before-first-dont chopped-at-do)]
     to-be-included))
 
-(defn day-3-star-1 [path]
+(defn star-1 [path]
   (let [lines (->> (util/read-file-into-list path))]
     (->> lines
          (mapcat find-mul-patterns)
@@ -28,7 +30,7 @@
                 (* a b)))
          (reduce +))))
 
-(defn day-3-star-2 [path]
+(defn star-2 [path]
   (let [input-string (slurp path)]
     (->> input-string
          (extract-active-parts)
@@ -49,10 +51,9 @@
   ;;  57557767
 
 
-  (slurp "resources/day-3-input1.txt")
-  (day-3-star-1 "resources/day-3-test-input.txt")
-  (day-3-star-1 "resources/day-3-input1.txt")
-
-  (day-3-star-2 "resources/day-3-test-input2.txt")
-  (day-3-star-2 "resources/day-3-input1.txt")
+  (slurp (str input-path "input1.txt"))
+  (star-1 (str input-path "test-input.txt"))
+  (star-1 (str input-path "input1.txt"))
+  (star-2 (str input-path "test-input2.txt"))
+  (star-2 (str input-path "input1.txt"))
   )

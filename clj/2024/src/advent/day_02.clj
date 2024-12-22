@@ -1,6 +1,8 @@
 (ns advent.day-02
   (:require [advent.util :as util]))
 
+(def input-path "resources/day02/")
+
 (defn adjacent-diff-in-range? [nums]
   (every? (fn [[a b]]
             (let [diff (Math/abs (- a b))]
@@ -25,14 +27,14 @@
 (defn is-actually-safe? [numbers]
   (some is-safe? (remove-one-at-a-time numbers)))
 
-(defn day-2-star-1 [path]
+(defn star-1 [path]
   (let [lines (->> (util/read-file-into-list-of-lists path)
                    (map (fn [line] (map #(Integer/parseInt %) line))))]
     (->> lines
          (filter is-safe?)
          count)))
 
-(defn day-2-star-2 [path]
+(defn star-2 [path]
   (let [lines (->> (util/read-file-into-list-of-lists path)
                    (map (fn [line] (map #(Integer/parseInt %) line))))
         safe-reports (->> lines (filter is-safe?))
@@ -42,8 +44,8 @@
 
 (comment
 
-  (day-2-star-1 "resources/day-2-test-input.txt")
-  (day-2-star-2 "resources/day-2-test-input.txt")
-  (day-2-star-1 "resources/day-2-input1.txt")
-  (day-2-star-2 "resources/day-2-input1.txt")
+  (star-1 (str input-path "input-test.txt"))
+  (star-2 (str input-path "input-test.txt"))
+  (star-1 (str input-path "input.txt"))
+  (star-2 (str input-path "input.txt"))
   )
