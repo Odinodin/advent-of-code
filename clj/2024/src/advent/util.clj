@@ -25,6 +25,12 @@
               [x c] (indexed line)]
           [[x y] c])))
 
+(defn lines->xy-to-char [lines]
+  (into {}
+        (for [[y line] (indexed lines)
+              [x c] (indexed line)]
+          [[x y] c])))
+
 (defn bounds-map [xy-to-char]
   (let [width (->> xy-to-char keys (map first) (apply max) inc) ;; inc because 0-based coordinates
         height (->> xy-to-char keys (map second) (apply max) inc)]
