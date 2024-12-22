@@ -36,14 +36,29 @@
       (>= x width)
       (>= y height)))
 
-(defn reify-map [xy-to-char]
-  (let [[width height] (bounds-map xy-to-char)]
-    (->> (for [col (range width)
-               row (range height)]
-           (str (get xy-to-char [row col])))
-         (partition width))))
+(defn reify-map
+  ([xy-to-char]
+   (reify-map (bounds-map xy-to-char) xy-to-char))
+  ([bounds xy-to-char]
+   (let [[width height] bounds]
+     (->> (for [row (range height)
+                col (range width)]
+            (str (get xy-to-char [col row] ".")))
+          (partition width)))))
 
 (defn print-map! [mappy]
   (doseq [row mappy]
     (println (str/join "" row))))
 
+
+(comment
+  (let [width 11 height 7]
+    (->> (for [row (range height)
+               col (range width)]
+           (str [col row])
+
+           )
+         (partition width)
+         ))
+
+  )
