@@ -1,6 +1,7 @@
 (ns advent.util
   (:require [clojure.java.io :as io])
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [medley.core :as m]))
 
 (defn read-file-into-list-of-lists [filepath]
   (with-open [rdr (io/reader filepath)]
@@ -14,7 +15,12 @@
     (doall
       (line-seq rdr))))
 
-
+(defn coord-in-dir [[x y] direction]
+  (case direction
+    \< [(dec x) y]
+    \> [(inc x) y]
+    \^ [x (dec y)]
+    \v [x (inc y)]))
 
 (defn indexed [items]
   (map-indexed vector items))
@@ -30,6 +36,9 @@
         (for [[y line] (indexed lines)
               [x c] (indexed line)]
           [[x y] c])))
+
+(defn find-in-xy-to-char [xy-to-char what]
+  (first (m/find-first (fn [[k v]] (= v what)) xy-to-char)))
 
 (defn bounds-map [xy-to-char]
   (let [width (->> xy-to-char keys (map first) (apply max) inc) ;; inc because 0-based coordinates
