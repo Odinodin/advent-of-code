@@ -59,10 +59,7 @@ class Day04 {
         val unprocessedScratchCards =  cards.toMutableList()
         val processedCards = mutableListOf<Card>()
 
-        for (card in unprocessedScratchCards) {
-
-
-        }
+      return 0
 
     }
 }
@@ -70,7 +67,7 @@ class Day04 {
 
 fun main() {
 
-    val input = resourceAsListOfString("day04.txt")
+    val input = resourceAsListOfString("2023/day04.txt")
 
     // 1. challenge
     println("Part 1: " + Day04().part1(input))

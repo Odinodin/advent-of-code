@@ -104,7 +104,7 @@ class Day03 {
 
 fun main() {
     //val input = resourceAsListOfString("day03_sample1.txt")
-    val input = resourceAsListOfString("day03.txt")
+    val input = resourceAsListOfString("2023/day03.txt")
 
     // 1. challenge
     println("Part 1: " + Day03().part1(input))

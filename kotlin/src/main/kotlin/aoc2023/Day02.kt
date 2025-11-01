@@ -71,7 +71,7 @@ class Day02 {
 
 
 fun main() {
-    val input = resourceAsListOfString("day02.txt")
+    val input = resourceAsListOfString("2023/day02.txt")
 
     // 1. challenge
     val bagContents = mapOf("red" to 12, "green" to 13, "blue" to 14)

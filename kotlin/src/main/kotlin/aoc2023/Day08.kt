@@ -109,7 +109,7 @@ class Day08 {
 }
 
 fun main() {
-    val input = resourceAsListOfString("day08.txt")
+    val input = resourceAsListOfString("2023/day08.txt")
     //val input = resourceAsListOfString("day08.txt")
 
     // 1. challenge
