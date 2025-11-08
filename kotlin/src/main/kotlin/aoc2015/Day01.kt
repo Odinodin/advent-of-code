@@ -39,7 +39,6 @@ fun solveDay01Part2(inputPath: String) {
   val lines = resourceAsListOfString(inputPath)
   val input: String = resourceAsListOfString(inputPath).first()
 
-
   input
     .asSequence()
     // runningFold gir en LISTE med alle delsvarene underveis
@@ -59,15 +58,15 @@ fun main() {
   solveDay01Part2("2015/day02.txt")
 
   // Fold vs runningFold
-  val input = listOf(1,2,3,4,5)
+  val input = listOf(1, 2, 3, 4, 5)
 
   input.fold(0) { acc, curr ->
     acc + curr
-  }.also { println(it)}
+  }.also { println(it) }
 
   input.runningFold(0) { acc, curr ->
     acc + curr
-  }.also { println(it)}
+  }.also { println(it) }
 }
 
 

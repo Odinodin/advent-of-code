@@ -27,16 +27,15 @@ fun solveDay01Part2(inputPath: String) {
 
   // Calculate how many times each number appears in the left list
   // This version runs through the right list for each number, not very efficient
-//  left.map { curr -> right.count { curr == it } * curr }
-//    .sum()
-//    .also { println(it) }
+  //  left.map { curr -> right.count { curr == it } * curr }
+  //    .sum()
+  //    .also { println(it) }
 
   // Note the use of groupingBy, which is not the same as groupBy.
   // A Grouping is a construct that supports certain operations per group, like fold or eachCount.s
   val freqs = right.groupingBy { it }.eachCount()
   left.map { freqs.getOrDefault(it, 0) * it }.sum().also { println(it) }
 }
-
 
 fun main() {
   solveDay01Part1("2024/day01_sample.txt")
