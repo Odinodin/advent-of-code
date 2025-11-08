@@ -18,6 +18,20 @@ fun solveDay02Part1(inputPath: String) {
     .also { println(it) }
 }
 
+fun solveDay02Part2(inputPath: String) {
+  val lines = resourceAsListOfString(inputPath)
+
+  lines
+    .map { line -> line.split("x").map { it.toLong() } }
+    .sumOf { (l, w, h) ->
+      val twoShortestSides = listOf(l, w, h).sorted().take(2)
+      val bowLength = l * w * h
+      twoShortestSides.sum() * 2 + bowLength
+    }
+    .also { println(it) }
+}
+
 fun main() {
   solveDay02Part1("2015/day02.txt")
+  solveDay02Part2("2015/day02.txt")
 }
