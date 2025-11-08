@@ -54,9 +54,9 @@ fun solveDay01Part2(inputPath: String) {
 }
 
 fun main() {
-  solveDay01Part1("2024/day02.txt")
+  solveDay01Part1("2015/day02.txt")
   //solveDay01Part2Imperative("2024/day02.txt")
-  solveDay01Part2("2024/day02.txt")
+  solveDay01Part2("2015/day02.txt")
 
   // Fold vs runningFold
   val input = listOf(1,2,3,4,5)
