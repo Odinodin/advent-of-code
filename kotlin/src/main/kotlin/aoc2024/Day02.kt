@@ -2,7 +2,8 @@ package aoc2024
 
 import resourceAsListOfString
 
-fun solveDay02Part1(inputPath: String) {val lines = resourceAsListOfString(inputPath)
+fun solveDay02Part1(inputPath: String) {
+  val lines = resourceAsListOfString(inputPath)
   val input: String = resourceAsListOfString(inputPath).first()
 
   input.toList().fold(0) { acc, ch ->
@@ -14,7 +15,8 @@ fun solveDay02Part1(inputPath: String) {val lines = resourceAsListOfString(input
   }.also { println("Solution part 1: " + it) }
 }
 
-fun solveDay02Part2(inputPath: String) {val lines = resourceAsListOfString(inputPath)
+fun solveDay02Part2Imperative(inputPath: String) {
+  val lines = resourceAsListOfString(inputPath)
   val input: String = resourceAsListOfString(inputPath).first()
 
   var acc = 0
@@ -33,9 +35,39 @@ fun solveDay02Part2(inputPath: String) {val lines = resourceAsListOfString(input
   println("Solution part 2: " + (currIdx + 1))
 }
 
-// 1770 too low
+fun solveDay02Part2(inputPath: String) {
+  val lines = resourceAsListOfString(inputPath)
+  val input: String = resourceAsListOfString(inputPath).first()
+
+
+  input
+    .asSequence()
+    // runningFold gir en LISTE med alle delsvarene underveis
+    .runningFold(0) { acc, ch ->
+      when (ch) {
+        '(' -> acc + 1
+        ')' -> acc - 1
+        else -> acc
+      }
+    }.indexOfFirst { it == -1 }
+    .also { println("Solution part 2: " + (it)) }
+}
 
 fun main() {
   solveDay02Part1("2024/day02.txt")
+  //solveDay02Part2Imperative("2024/day02.txt")
   solveDay02Part2("2024/day02.txt")
+
+  // Fold vs runningFold
+  val input = listOf(1,2,3,4,5)
+
+  input.fold(0) { acc, curr ->
+    acc + curr
+  }.also { println(it)}
+
+  input.runningFold(0) { acc, curr ->
+    acc + curr
+  }.also { println(it)}
 }
+
+
